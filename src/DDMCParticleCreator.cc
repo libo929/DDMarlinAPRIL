@@ -198,7 +198,7 @@ pandora::StatusCode DDMCParticleCreator::CreateCaloHitToMCParticleRelationships(
                 try
                 {
                     mcParticleToEnergyWeightMap.clear();
-                    const EVENT::LCObjectVec &objectVec = navigate.getRelatedToObjects(*caloHitIter);
+					const EVENT::LCObjectVec &objectVec = navigate.getRelatedFromObjects(*caloHitIter);
 
                     for (EVENT::LCObjectVec::const_iterator itRel = objectVec.begin(), itRelEnd = objectVec.end(); itRel != itRelEnd; ++itRel)
                     {
