@@ -184,9 +184,19 @@ pandora::StatusCode DDMCParticleCreator::CreateCaloHitToMCParticleRelationships(
     typedef std::map<MCParticle *, float> MCParticleToEnergyWeightMap;
     MCParticleToEnergyWeightMap mcParticleToEnergyWeightMap;
 
+	std::set<EVENT::CalorimeterHit*> hitsHasNoMCP;
+
+	for (CalorimeterHitVector::const_iterator caloHitIter = calorimeterHitVector.begin(),
+		caloHitIterEnd = calorimeterHitVector.end(); caloHitIter != caloHitIterEnd; ++caloHitIter)
+	{
+		hitsHasNoMCP.insert(*caloHitIter);
+	}
+
     for (StringVector::const_iterator iter = m_settings.m_lcCaloHitRelationCollections.begin(), iterEnd = m_settings.m_lcCaloHitRelationCollections.end();
          iter != iterEnd; ++iter)
     {
+		std::cout << "CaloHitRel collection: " << *iter << std::endl;
+
         try
         {
             const EVENT::LCCollection *pMCRelationCollection = pLCEvent->getCollection(*iter);
@@ -198,20 +208,41 @@ pandora::StatusCode DDMCParticleCreator::CreateCaloHitToMCParticleRelationships(
                 try
                 {
                     mcParticleToEnergyWeightMap.clear();
-					const EVENT::LCObjectVec &objectVec = navigate.getRelatedFromObjects(*caloHitIter);
+					const EVENT::LCObjectVec* pObjectVec = & (navigate.getRelatedFromObjects(*caloHitIter) );
+
+					if(pObjectVec->empty()) pObjectVec = &( navigate.getRelatedToObjects(*caloHitIter) );
+						
+					const EVENT::LCObjectVec& objectVec = *pObjectVec;
+
+					if(objectVec.empty()) navigate.getRelatedFromObjects(*caloHitIter);
 
                     for (EVENT::LCObjectVec::const_iterator itRel = objectVec.begin(), itRelEnd = objectVec.end(); itRel != itRelEnd; ++itRel)
                     {
                         EVENT::SimCalorimeterHit *pSimHit = dynamic_cast<SimCalorimeterHit *>(*itRel);
 
                         if (NULL == pSimHit)
+						{
+							std::cout << "simhit is null, hit: " << pSimHit << std::endl;
                             continue;
+						}
 
                         for (int iCont = 0, iEnd = pSimHit->getNMCContributions(); iCont < iEnd; ++iCont)
                         {
                             mcParticleToEnergyWeightMap[pSimHit->getParticleCont(iCont)] += pSimHit->getEnergyCont(iCont);
                         }
                     }
+
+#if 1
+					if(objectVec.empty())
+					{
+						//std::cout << "---->>> a MCP map is empty, hit is: " << *caloHitIter << std::endl;
+					}
+					else
+					{
+						//std::cout << "---- MCP map size: " << mcParticleToEnergyWeightMap.size() << ", hit is: " << *caloHitIter << std::endl;  
+						hitsHasNoMCP.erase( hitsHasNoMCP.find(*caloHitIter) );
+					}
+#endif
 
                     for (MCParticleToEnergyWeightMap::const_iterator mcParticleIter = mcParticleToEnergyWeightMap.begin(),
                         mcParticleIterEnd = mcParticleToEnergyWeightMap.end(); mcParticleIter != mcParticleIterEnd; ++mcParticleIter)
@@ -222,19 +253,26 @@ pandora::StatusCode DDMCParticleCreator::CreateCaloHitToMCParticleRelationships(
                 }
                 catch (pandora::StatusCodeException &statusCodeException)
                 {
-                    streamlog_out(ERROR) << "Failed to extract calo hit to mc particle relationship: " << statusCodeException.ToString() << std::endl;
+					std::cout << "Failed to extract calo hit to mc particle relationship: " << statusCodeException.ToString() << std::endl;
                 }
                 catch (EVENT::Exception &exception)
                 {
-                    streamlog_out(WARNING) << "Failed to extract calo hit to mc particle relationship: " << exception.what() << std::endl;
+					std::cout << "Failed to extract calo hit to mc particle relationship: " << exception.what() << std::endl;
                 }
             }
         }
         catch (EVENT::Exception &exception)
         {
-            streamlog_out(DEBUG5) << "Failed to extract calo hit to mc particle relationships collection: " << *iter << ", " << exception.what() << std::endl;
+			std::cout << "Failed to extract calo hit to mc particle relationships collection: " << *iter << ", " << exception.what() << std::endl;
         }
     }
+
+	for (auto it = hitsHasNoMCP.begin(); it != hitsHasNoMCP.end(); ++it)
+	{
+		const CalorimeterHit* pHit = *it;
+
+		std::cout << "hit with no MCP: " << pHit << ", CellID: " << pHit->getCellID0() << ", " << pHit->getCellID1() << std::endl;
+	}
 
     return pandora::STATUS_CODE_SUCCESS;
 }
