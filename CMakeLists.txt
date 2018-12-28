@@ -61,6 +61,10 @@ IF( PANDORA_MONITORING )
     ENDIF()
 ENDIF()
 
+# mlpack
+INCLUDE_DIRECTORIES( "/projects/soft/mlpack-3.0.3/include" )
+LINK_LIBRARIES( "/projects/soft/mlpack-3.0.3/lib/libmlpack.so" )
+
 ### DOCUMENTATION ###########################################################
 
 OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" OFF )

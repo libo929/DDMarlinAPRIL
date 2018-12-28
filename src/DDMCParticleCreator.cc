@@ -195,7 +195,7 @@ pandora::StatusCode DDMCParticleCreator::CreateCaloHitToMCParticleRelationships(
     for (StringVector::const_iterator iter = m_settings.m_lcCaloHitRelationCollections.begin(), iterEnd = m_settings.m_lcCaloHitRelationCollections.end();
          iter != iterEnd; ++iter)
     {
-		std::cout << "CaloHitRel collection: " << *iter << std::endl;
+		//std::cout << "CaloHitRel collection: " << *iter << std::endl;
 
         try
         {
@@ -267,12 +267,14 @@ pandora::StatusCode DDMCParticleCreator::CreateCaloHitToMCParticleRelationships(
         }
     }
 
+#if 0
 	for (auto it = hitsHasNoMCP.begin(); it != hitsHasNoMCP.end(); ++it)
 	{
 		const CalorimeterHit* pHit = *it;
 
 		std::cout << "hit with no MCP: " << pHit << ", CellID: " << pHit->getCellID0() << ", " << pHit->getCellID1() << std::endl;
 	}
+#endif
 
     return pandora::STATUS_CODE_SUCCESS;
 }
