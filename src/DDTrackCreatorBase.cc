@@ -375,7 +375,8 @@ void DDTrackCreatorBase::GetTrackStates(const EVENT::Track *const pTrack, Pandor
     this->CopyTrackState(pEndTrack->getTrackState(TrackState::AtLastHit), trackParameters.m_trackStateAtEnd);
     this->CopyTrackState(pEndTrack->getTrackState(TrackState::AtCalorimeter), trackParameters.m_trackStateAtCalorimeter);
 
-    trackParameters.m_isProjectedToEndCap = ((std::fabs(trackParameters.m_trackStateAtCalorimeter.Get().GetPosition().GetZ()) < m_settings.m_eCalEndCapInnerZ) ? false : true);
+    const float TOLORANCE = 1.e-3;
+    trackParameters.m_isProjectedToEndCap = ((std::fabs(trackParameters.m_trackStateAtCalorimeter.Get().GetPosition().GetZ()) < m_settings.m_eCalEndCapInnerZ - TOLORANCE) ? false : true);
 
     // Convert generic time (length from reference point to intersection, divided by momentum) into nanoseconds
     const float minGenericTime(this->CalculateTrackTimeAtCalorimeter(pTrack));
