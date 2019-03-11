@@ -254,7 +254,7 @@ private:
 
     dd4hep::VolumeManager m_volumeManager; ///< DD4hep volume manager
 
-	arbor_content::CaloHitFactory      *m_pCaloHitFactory;                   ///< The calo hit factory used for arbor calo hit creation
+	static arbor_content::CaloHitFactory      m_pCaloHitFactory;            ///< The calo hit factory used for arbor calo hit creation
 };
 
 //------------------------------------------------------------------------------------------------------------------------------------------

@@ -303,6 +303,8 @@ pandora::StatusCode DDArborPFAProcessor::RegisterUserComponents() const
 
     PANDORA_RETURN_RESULT_IF(pandora::STATUS_CODE_SUCCESS, !=, ArborContent::RegisterParticleIds(*m_pPandora));
 
+    PANDORA_RETURN_RESULT_IF(pandora::STATUS_CODE_SUCCESS, !=, ArborContent::RegisterArborShowerProfilePlugin(*m_pPandora));
+
     PANDORA_RETURN_RESULT_IF(pandora::STATUS_CODE_SUCCESS, !=, PandoraApi::RegisterAlgorithmFactory(*m_pPandora,
         "ExternalClustering", new DDExternalClusteringAlgorithm::Factory));
 
