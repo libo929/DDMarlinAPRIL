@@ -37,13 +37,20 @@ FIND_PACKAGE( Marlin 1.0 REQUIRED )
 FIND_PACKAGE( MarlinUtil 01.10 REQUIRED )
 FIND_PACKAGE( PandoraSDK 03.00.00 REQUIRED )
 #FIND_PACKAGE( LCContent 03.00.00 REQUIRED )
-FIND_PACKAGE( ArborContent 01.05.01 REQUIRED )
+FIND_PACKAGE( ArborContent REQUIRED )
 FIND_PACKAGE( DD4hep REQUIRED )
 FIND_PACKAGE( ROOT REQUIRED )
 FIND_PACKAGE( MarlinTrk REQUIRED )
 
+IF (ArborContent_FOUND)
+	LIST(APPEND CMAKE_MODULE_PATH ${ArborContent_ROOT}/cmake)
+ELSE()
+	MESSAGE(FATAL_ERROR "ArborContent is not found.")
+ENDIF()
 
-FOREACH( pkg PandoraSDK Marlin MarlinUtil ArborContent DD4hep ROOT MarlinTrk )
+FIND_PACKAGE( mlpack REQUIRED )
+
+FOREACH( pkg PandoraSDK Marlin MarlinUtil ArborContent DD4hep ROOT MarlinTrk mlpack)
     IF( ${pkg}_FOUND )
         INCLUDE_DIRECTORIES( SYSTEM ${${pkg}_INCLUDE_DIRS} )
         LINK_LIBRARIES( ${${pkg}_LIBRARIES} )
@@ -60,10 +67,6 @@ IF( PANDORA_MONITORING )
         ADD_DEFINITIONS( "-DMONITORING" )
     ENDIF()
 ENDIF()
-
-# mlpack
-INCLUDE_DIRECTORIES( "/projects/soft/mlpack-3.0.3/include" )
-LINK_LIBRARIES( "/projects/soft/mlpack-3.0.3/lib/libmlpack.so" )
 
 ### DOCUMENTATION ###########################################################
 
