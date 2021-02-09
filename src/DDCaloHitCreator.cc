@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/src/DDCaloHitCreator.cc
+ *  @file   DDMarlinAPRIL/src/DDCaloHitCreator.cc
  * 
  *  @brief  Implementation of the calo hit creator class.
  * 
@@ -13,7 +13,7 @@
 
 #include "UTIL/CellIDDecoder.h"
 
-#include "ArborApi/ObjectFactories.h"
+#include "APRILApi/ObjectFactories.h"
 
 
 #include <DD4hep/DD4hepUnits.h>
@@ -31,7 +31,7 @@
 dd4hep::rec::LayeredCalorimeterData * getExtension(unsigned int includeFlag, unsigned int excludeFlag=0);
 
 // double getCoilOuterR();
-arbor_content::CaloHitFactory DDCaloHitCreator::m_pCaloHitFactory;
+april_content::CaloHitFactory DDCaloHitCreator::m_pCaloHitFactory;
 
 ///FIXME: HANDLE PROBLEM WHEN EXTENSION IS MISSING
 DDCaloHitCreator::DDCaloHitCreator(const Settings &settings, const pandora::Pandora *const pPandora) :

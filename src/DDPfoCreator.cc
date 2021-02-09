@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/src/DDPfoCreator.cc
+ *  @file   DDMarlinAPRIL/src/DDPfoCreator.cc
  * 
  *  @brief  Implementation of the pfo creator class.
  * 

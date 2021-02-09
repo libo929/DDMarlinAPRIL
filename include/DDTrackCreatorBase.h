@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/include/DDTrackCreatorBase.h
+ *  @file   DDMarlinAPRIL/include/DDTrackCreatorBase.h
  * 
  *  @brief  Header file for the track creator base class.
  * 

@@ -1,18 +1,18 @@
 ########################################################
-# cmake file for building DDMarlinArbor
+# cmake file for building DDMarlinAPRIL
 # @author Jan Engels, DESY
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.2 FATAL_ERROR)
 ########################################################
 
 
 # project name
-PROJECT( DDMarlinArbor )
+PROJECT( DDMarlinAPRIL )
 
 
-# project version# continuing from MarlinArbor version 2.0.0 revision 1934
-SET( DDMarlinArbor_VERSION_MAJOR 0 )
-SET( DDMarlinArbor_VERSION_MINOR 9 )
-SET( DDMarlinArbor_VERSION_PATCH 1 )
+# project version# continuing from MarlinAPRIL version 2.0.0 revision 1934
+SET( DDMarlinAPRIL_VERSION_MAJOR 0 )
+SET( DDMarlinAPRIL_VERSION_MINOR 9 )
+SET( DDMarlinAPRIL_VERSION_PATCH 1 )
 
 
 ### CMAKE ###################################################################
@@ -29,7 +29,7 @@ INCLUDE( ilcsoft_default_settings )
 INCLUDE_DIRECTORIES( ./include )
 INSTALL_DIRECTORY( ./include DESTINATION . FILES_MATCHING PATTERN "*.h" )
 
-AUX_SOURCE_DIRECTORY( ./src/ DDMarlinArbor_SRCS )
+AUX_SOURCE_DIRECTORY( ./src/ DDMarlinAPRIL_SRCS )
 
 ### DEPENDENCIES ############################################################
 
@@ -37,20 +37,20 @@ FIND_PACKAGE( Marlin 1.0 REQUIRED )
 FIND_PACKAGE( MarlinUtil 01.10 REQUIRED )
 FIND_PACKAGE( PandoraSDK 03.00.00 REQUIRED )
 #FIND_PACKAGE( LCContent 03.00.00 REQUIRED )
-FIND_PACKAGE( ArborContent REQUIRED )
+FIND_PACKAGE( APRILContent REQUIRED )
 FIND_PACKAGE( DD4hep REQUIRED )
 FIND_PACKAGE( ROOT REQUIRED )
 FIND_PACKAGE( MarlinTrk REQUIRED )
 
-IF (ArborContent_FOUND)
-	LIST(APPEND CMAKE_MODULE_PATH ${ArborContent_ROOT}/cmake)
+IF (APRILContent_FOUND)
+	LIST(APPEND CMAKE_MODULE_PATH ${APRILContent_ROOT}/cmake)
 ELSE()
-	MESSAGE(FATAL_ERROR "ArborContent is not found.")
+	MESSAGE(FATAL_ERROR "APRILContent is not found.")
 ENDIF()
 
 FIND_PACKAGE( mlpack REQUIRED )
 
-FOREACH( pkg PandoraSDK Marlin MarlinUtil ArborContent DD4hep ROOT MarlinTrk mlpack)
+FOREACH( pkg PandoraSDK Marlin MarlinUtil APRILContent DD4hep ROOT MarlinTrk mlpack)
     IF( ${pkg}_FOUND )
         INCLUDE_DIRECTORIES( SYSTEM ${${pkg}_INCLUDE_DIRS} )
         LINK_LIBRARIES( ${${pkg}_LIBRARIES} )
@@ -68,6 +68,8 @@ IF( PANDORA_MONITORING )
     ENDIF()
 ENDIF()
 
+SET( CMAKE_CXX_FLAGS "-fopenmp ${CMAKE_CXX_FLAGS}" )
+
 ### DOCUMENTATION ###########################################################
 
 OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" OFF )
@@ -83,13 +85,13 @@ ENDIF()
 ### LIBRARY #################################################################
 
 # add library
-ADD_SHARED_LIBRARY( DDMarlinArbor ${DDMarlinArbor_SRCS} )
+ADD_SHARED_LIBRARY( DDMarlinAPRIL ${DDMarlinAPRIL_SRCS} )
 
 
 ### INSTALL #################################################################
 
 # install library
-INSTALL_SHARED_LIBRARY( DDMarlinArbor DESTINATION lib )
+INSTALL_SHARED_LIBRARY( DDMarlinAPRIL DESTINATION lib )
 
 # install header files
 INSTALL_DIRECTORY( ./include DESTINATION . )

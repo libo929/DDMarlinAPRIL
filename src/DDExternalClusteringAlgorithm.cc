@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/src/DDExternalClusteringAlgorithm.cc
+ *  @file   DDMarlinAPRIL/src/DDExternalClusteringAlgorithm.cc
  * 
  *  @brief  Implementation of the external clustering algorithm class.
  * 
@@ -11,7 +11,7 @@
 #include "EVENT/Cluster.h"
 
 #include "DDExternalClusteringAlgorithm.h"
-#include "DDArborPFAProcessor.h"
+#include "DDAPRILPFAProcessor.h"
 
 #include "Pandora/AlgorithmHeaders.h"
 
@@ -35,7 +35,7 @@ StatusCode DDExternalClusteringAlgorithm::Run()
             return STATUS_CODE_SUCCESS;
 
         // Get external photon cluster collection
-        const EVENT::LCEvent *const pLCEvent(DDArborPFAProcessor::GetCurrentEvent(&(this->GetPandora())));
+        const EVENT::LCEvent *const pLCEvent(DDAPRILPFAProcessor::GetCurrentEvent(&(this->GetPandora())));
         const EVENT::LCCollection *const pExternalClusterCollection = pLCEvent->getCollection(m_externalClusterCollectionName);
         const unsigned int nExternalClusters(pExternalClusterCollection->getNumberOfElements());
 

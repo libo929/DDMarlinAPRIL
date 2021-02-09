@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/include/DDMCParticleCreator.h
+ *  @file   DDMarlinAPRIL/include/DDMCParticleCreator.h
  * 
  *  @brief  Header file for the mc particle creator class.
  * 

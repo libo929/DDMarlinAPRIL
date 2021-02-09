@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/include/DDTrackCreatorCLIC.h
+ *  @file   DDMarlinAPRIL/include/DDTrackCreatorCLIC.h
  * 
  *  @brief  Header file for the ILD implementation of the track creator class.
  * 

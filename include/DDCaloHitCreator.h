@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/include/DDCaloHitCreator.h
+ *  @file   DDMarlinAPRIL/include/DDCaloHitCreator.h
  * 
  *  @brief  Header file for the calo hit creator class.
  * 
@@ -24,7 +24,7 @@
 
 typedef std::vector<EVENT::CalorimeterHit *> CalorimeterHitVector;
 
-namespace arbor_content { class CaloHitFactory; }
+namespace april_content { class CaloHitFactory; }
 
 /**
  *  @brief  DDCaloHitCreator class
@@ -254,7 +254,7 @@ private:
 
     dd4hep::VolumeManager m_volumeManager; ///< DD4hep volume manager
 
-	static arbor_content::CaloHitFactory      m_pCaloHitFactory;            ///< The calo hit factory used for arbor calo hit creation
+	static april_content::CaloHitFactory      m_pCaloHitFactory;            ///< The calo hit factory used for april calo hit creation
 };
 
 //------------------------------------------------------------------------------------------------------------------------------------------

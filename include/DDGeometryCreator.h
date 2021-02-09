@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/include/DDGeometryCreator.h
+ *  @file   DDMarlinAPRIL/include/DDGeometryCreator.h
  * 
  *  @brief  Header file for the geometry creator class.
  * 

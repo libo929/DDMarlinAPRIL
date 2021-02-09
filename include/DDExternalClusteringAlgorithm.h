@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/include/DDExternalClusteringAlgorithm.h
+ *  @file   DDMarlinAPRIL/include/DDExternalClusteringAlgorithm.h
  * 
  *  @brief  Header file for the external clustering algorithm class.
  * 

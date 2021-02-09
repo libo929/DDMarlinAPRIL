@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/src/DDGeometryCreator.cc
+ *  @file   DDMarlinAPRIL/src/DDGeometryCreator.cc
  * 
  *  @brief  Implementation of the geometry creator class.
  * 

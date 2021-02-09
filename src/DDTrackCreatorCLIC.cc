@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/src/DDTrackCreatorCLIC.cc
+ *  @file   DDMarlinAPRIL/src/DDTrackCreatorCLIC.cc
  * 
  *  @brief  Implementation of the track creator class for a CLIC all silicon tracker.
  * 

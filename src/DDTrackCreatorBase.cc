@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/src/DDTrackCreatorBase.cc
+ *  @file   DDMarlinAPRIL/src/DDTrackCreatorBase.cc
  * 
  *  @brief  Implementation of the track creator class.
  * 

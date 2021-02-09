@@ -1,5 +1,5 @@
 /**
- *  @file   DDMarlinArbor/src/DDMCParticleCreator.cc
+ *  @file   DDMarlinAPRIL/src/DDMCParticleCreator.cc
  * 
  *  @brief  Implementation of the mc particle creator class.
  * 
